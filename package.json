@@ -1,0 +1,52 @@
+{
+  "name": "tanzak",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "run-p dev:next 'gen:sass-type --watch'",
+    "dev:next": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "lint:fix": "next lint --fix",
+    "format": "prettier --write src",
+    "format:check": "prettier --check src",
+    "gen": "run-p gen:*",
+    "gen:sass-type": "typed-scss-modules src",
+    "stylelint": "stylelint 'src/**/*.{css,scss}'",
+    "stylelint:fix": "stylelint --fix 'src/**/*.{css,scss}'",
+    "typed-scss-modules": "typed-scss-modules src/styles --output src/styles",
+    "fix": "run-p lint:fix stylelint:fix format"
+  },
+  "dependencies": {
+    "next": "14.2.4",
+    "react": "^18",
+    "react-dom": "^18"
+  },
+  "devDependencies": {
+    "@svgr/babel-plugin-remove-jsx-attribute": "8.0.0",
+    "@svgr/babel-plugin-replace-jsx-attribute-value": "8.0.0",
+    "@svgr/cli": "^8.0.1",
+    "@svgr/plugin-jsx": "^8.0.1",
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "@typescript-eslint/eslint-plugin": "^7.13.1",
+    "eslint": "^8",
+    "eslint-config-next": "14.2.4",
+    "normalize.css": "^8.0.1",
+    "npm-run-all2": "^6.2.0",
+    "openapi-fetch": "^0.10.0",
+    "prettier": "^3.3.2",
+    "sass": "^1.77.6",
+    "stylelint": "^16.6.1",
+    "stylelint-config-recess-order": "^5.0.1",
+    "stylelint-config-standard-scss": "^13.1.0",
+    "typed-scss-modules": "^8.0.1",
+    "typescript": "^5"
+  },
+  "packageManager": "pnpm@9.4.0+sha256.b6fd0bfda555e7e584ad7e56b30c68b01d5a04f9ee93989f4b93ca8473c49c74",
+  "volta": {
+    "node": "22.3.0"
+  }
+}
