@@ -1,9 +1,23 @@
-import { Inter } from 'next/font/google'
-import './globals.scss'
+import clsx from 'clsx'
+import { Noto_Sans_JP, Kaisei_Decol, Yuji_Syuku } from 'next/font/google'
+import 'normalize.css/normalize.css'
 
 import type { Metadata } from 'next'
 
-const inter = Inter({ subsets: ['latin'] })
+const nsjp = Noto_Sans_JP({
+  subsets: ['latin-ext'],
+  variable: '--font-noto-sans-jp',
+})
+const kaiseiDecol = Kaisei_Decol({
+  subsets: ['latin-ext'],
+  weight: ['400', '700'],
+  variable: '--font-kaisei-decol',
+})
+const yujiShuku = Yuji_Syuku({
+  subsets: ['latin-ext'],
+  weight: ['400'],
+  variable: '--font-yuji',
+})
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -17,7 +31,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body
+        className={clsx(
+          nsjp.variable,
+          kaiseiDecol.variable,
+          yujiShuku.variable,
+        )}
+      >
+        {children}
+      </body>
     </html>
   )
 }
