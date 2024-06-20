@@ -44,7 +44,7 @@ jobs:
         name: Setup
 
       - name: Stylelint
-        run: pnpm lint-styles
+        run: pnpm stylelint
 
   type-check:
     runs-on: ubuntu-latest

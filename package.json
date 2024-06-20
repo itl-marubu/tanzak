@@ -11,6 +11,7 @@
     "lint:fix": "next lint --fix",
     "format": "prettier --write src",
     "format:check": "prettier --check src",
+    "type-check": "tsc --noEmit",
     "gen": "run-p gen:*",
     "gen:sass-type": "typed-scss-modules src",
     "stylelint": "stylelint 'src/**/*.{css,scss}'",
