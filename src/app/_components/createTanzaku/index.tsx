@@ -10,17 +10,21 @@ type TanzakuProps = {
 } & React.HTMLAttributes<HTMLCanvasElement>
 
 export const CreateTanzaku = forwardRef<HTMLCanvasElement, TanzakuProps>(
-  function ({ textLine1, textLine2, nameLine, ...props }) {
+  function CreateTanzaku({ textLine1, textLine2, nameLine, ...props }) {
     const canvasRef = useRef<HTMLCanvasElement>(null)
     const [image, setImage] = useState<HTMLImageElement | null>(null)
     const [imageLoaded, setImageLoaded] = useState(false)
 
     useEffect(() => {
       const canvas = canvasRef.current
-      if (!canvas) return
+      if (!canvas) {
+        return
+      }
 
       const ctx = canvas.getContext('2d')
-      if (!ctx) return
+      if (!ctx) {
+        return
+      }
 
       const img = new Image()
       img.src = '/tanzaku.webp'
@@ -31,13 +35,19 @@ export const CreateTanzaku = forwardRef<HTMLCanvasElement, TanzakuProps>(
     }, [])
 
     useEffect(() => {
-      if (!imageLoaded) return
+      if (!imageLoaded) {
+        return
+      }
 
       const canvas = canvasRef.current
-      if (!canvas) return
+      if (!canvas) {
+        return
+      }
 
       const ctx = canvas.getContext('2d')
-      if (!ctx) return
+      if (!ctx) {
+        return
+      }
 
       ctx.drawImage(image as HTMLImageElement, 0, 0, 300, 500)
 
@@ -52,7 +62,7 @@ export const CreateTanzaku = forwardRef<HTMLCanvasElement, TanzakuProps>(
       ctx.font = '30px Yuji Syuku, HG正楷書体-PRO, serif'
       ctx.fillText(nameLine, 150, -10)
       ctx.restore()
-    }, [imageLoaded])
+    }, [textLine1, textLine2, nameLine, image, imageLoaded])
 
     return (
       <canvas

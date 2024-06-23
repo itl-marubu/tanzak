@@ -1,7 +1,7 @@
+import { CreateTanzaku } from './_components/createTanzaku'
 import { Logo } from './_components/Logo'
 import { TanzakuToImage } from './_components/t2i'
 import styles from './page.module.scss'
-import { CreateTanzaku } from './_components/createTanzaku'
 
 export default function Home() {
   return (

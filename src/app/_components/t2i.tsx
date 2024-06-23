@@ -37,7 +37,7 @@ export const TanzakuToImage: React.FC = () => {
         )
       }
     }
-  }, [imageLoaded])
+  }, [image, imageLoaded])
 
   const positionArray = [
     { x: '900px', y: '80px' },
@@ -64,21 +64,23 @@ export const TanzakuToImage: React.FC = () => {
           height: '100vh',
         }}
       />
-      {positionArray.map((position, index) => (
-        <CreateTanzaku
-          key={index}
-          textLine1="たんざくで"
-          textLine2="ざっくざく"
-          nameLine="みずさわ"
-          style={{
-            position: 'absolute',
-            left: position.x,
-            top: position.y,
-            height: '200px',
-            width: 'auto',
-          }}
-        />
-      ))}
+      {positionArray.map((position, index) => {
+        return (
+          <CreateTanzaku
+            key={index}
+            textLine1="たんざくで"
+            textLine2="ざっくざく"
+            nameLine="みずさわ"
+            style={{
+              position: 'absolute',
+              left: position.x,
+              top: position.y,
+              height: '200px',
+              width: 'auto',
+            }}
+          />
+        )
+      })}
     </>
   )
 }
