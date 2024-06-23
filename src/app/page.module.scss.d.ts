@@ -3,11 +3,7 @@
 export type Styles = {
   main: string
   sasa: string
-  tanzakuContainer: string
-  tanzakuImg: string
   tanzakuIntro: string
-  tanzakuMoji: string
-  tanzakuName: string
   yureru: string
 }
 

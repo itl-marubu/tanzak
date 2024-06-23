@@ -1,19 +1,16 @@
-import Image from 'next/image'
 import { Logo } from './_components/Logo'
-import { Tanzaku } from './_components/Tanzaku'
+import { TanzakuToImage } from './_components/t2i'
 import styles from './page.module.scss'
+import { CreateTanzaku } from './_components/createTanzaku'
 
 export default function Home() {
   return (
     <main className={styles.main}>
       <div>
-        <Image
-          src="/sasawTz.webp"
-          width={1000}
-          height={1000}
-          alt="sasa"
-          className={styles.sasa}
-        />
+        <div className={styles.sasa}>
+          <TanzakuToImage />
+        </div>
+
         <Logo
           logoColor="#fff"
           style={{
@@ -26,15 +23,11 @@ export default function Home() {
       </div>
       <div className={styles.tanzakuIntro}>
         <h2>ピックアップ短冊</h2>
-        <div className={styles.tanzakuContainer}>
-          <p className={styles.tanzakuMoji}>経済学部も都心移転させよう</p>
-          <p className={styles.tanzakuName}>みずさわなの</p>
-          <Tanzaku
-            tanzakuBg="#f8f8f8"
-            style={{ width: '30vw', height: '100%', zIndex: 1 }}
-            className={styles.tanzakuImg}
-          />
-        </div>
+        <CreateTanzaku
+          textLine1="たんざくで"
+          textLine2="ざっくざく"
+          nameLine="みずさわ"
+        />
       </div>
     </main>
   )
