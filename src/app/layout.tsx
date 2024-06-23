@@ -49,6 +49,7 @@ export default function RootLayout({
           kaiseiDecol.variable,
           yujiShuku.variable,
         )}
+        style={{ width: '1920px', height: '1080px', background: '#000' }}
       >
         {children}
       </body>
