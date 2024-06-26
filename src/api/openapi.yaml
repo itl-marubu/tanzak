@@ -1,0 +1,398 @@
+openapi: 3.0.0
+info:
+  title: Tanzaku API
+  version: 1.0.0
+servers:
+  - url: https://tanzak-backend.fuminori.workers.dev
+    description: Production server
+  - url: http://localhost:8787
+    description: Development server
+paths:
+  /admin/new:
+    post:
+      operationId: signUp
+      tags:
+        - Accounts
+      summary: Health Check
+      description: Check if the server is running
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AccountRegistrationRequest'
+      responses:
+        '200':
+          description: Account created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountRegistrationResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Error500'
+      security:
+        - bearerAuth: []
+  /admin/login:
+    post:
+      operationId: signIn
+      tags:
+        - Accounts
+      summary: Sign In
+      description: Sign in to the account
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+      responses:
+        '200':
+          description: Sign In Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SignInTokenResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Error500'
+
+  /projects/add:
+    post:
+      operationId: addProject
+      tags:
+        - Projects
+      summary: Add Project
+      description: Add a new project
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddProjectRequest'
+      responses:
+        '201':
+          description: Project added
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectSchema'
+        '500':
+          description: Internal Server Error
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Error500'
+      security:
+        - bearerAuth: []
+  /projects/list:
+    get:
+      operationId: listProjects
+      tags:
+        - Projects
+      summary: List Projects
+      description: List all projects
+      responses:
+        '200':
+          description: List of projects
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectSchemaArray'
+        '500':
+          description: Internal Server Error
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Error500'
+      security:
+        - bearerAuth: []
+
+  /projects/{projectId}/list:
+    get:
+      operationId: getProject
+      tags:
+        - Projects
+      summary: Get Project
+      description: Get a project by ID
+      parameters:
+        - name: projectId
+          in: path
+          required: true
+          description: ID of the project to get
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Project found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TanzakuSchemaArray'
+        '500':
+          description: Internal Server Error
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Error500'
+      security:
+        - bearerAuth: []
+  /projects/{projectId}:
+    delete:
+      operationId: deleteProject
+      tags:
+        - Projects
+      summary: Delete Project
+      description: Delete a project by ID
+      parameters:
+        - name: projectId
+          in: path
+          required: true
+          description: ID of the project to get
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Project found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectSchema'
+        '500':
+          description: Internal Server Error
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Error500'
+      security:
+        - bearerAuth: []
+
+  /tanzaku/{projectId}/new:
+    post:
+      operationId: newTanzaku
+      tags:
+        - Tanzaku
+      summary: New Tanzaku
+      description: Create a new Tanzaku
+      parameters:
+        - name: projectId
+          in: path
+          required: true
+          description: ID of the project to get
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TanzakuSchema'
+      responses:
+        '200':
+          description: Project found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TanzakuResponseSchema'
+        '500':
+          description: Internal Server Error
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Error500'
+      security:
+        - bearerAuth: []
+  /tanzaku/{projectId}/list:
+    get:
+      operationId: getTanzaku
+      tags:
+        - Tanzaku
+      summary: Get Tanzaku
+      description: Get a tanzaku by project ID
+      parameters:
+        - name: projectId
+          in: path
+          required: true
+          description: ID of the project to get
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Project found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TanzakuSchemaArray'
+        '500':
+          description: Internal Server Error
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Error500'
+
+  /tanzaku/del/{tanzakuId}:
+    delete:
+      operationId: deleteTanzaku
+      tags:
+        - Tanzaku
+      summary: New Tanzaku
+      description: Create a new Tanzaku
+      parameters:
+        - name: tanzakuId
+          in: path
+          required: true
+          description: ID of the tanzaku to delete
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Project found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TanzakuResponseSchema'
+        '500':
+          description: Internal Server Error
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Error500'
+      security:
+        - bearerAuth: []
+
+components:
+  schemas:
+    AccountRegistrationRequest:
+      type: object
+      required:
+        - email
+        - password
+      properties:
+        email:
+          type: string
+          example: 'example@example.com'
+        password:
+          type: string
+          example: 'password'
+    AccountRegistrationResponse:
+      type: object
+      properties:
+        email:
+          type: string
+          example: 'example@example.com'
+    LoginRequest:
+      type: object
+      properties:
+        email:
+          type: string
+          example: 'example@example.com'
+        password:
+          type: string
+          example: 'password'
+    SignInTokenResponse:
+      type: object
+      properties:
+        token:
+          type: string
+          example: 'eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImhvZ2VAZ21haWwuY2...'
+    AddProjectRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          example: 'Project Name'
+        description:
+          type: string
+          example: 'Project Description'
+    ProjectSchema:
+      type: object
+      required:
+        - id
+        - name
+        - description
+        - ownerId
+      properties:
+        id:
+          type: string
+          example: 'clxrat7xl0001xd2txfzakzz9'
+        name:
+          type: string
+          example: 'Project Name'
+        description:
+          type: string
+          example: 'Project Description'
+        ownerId:
+          type: string
+          example: 'clxrat7xl0001xd2txfzakzz9'
+    ProjectSchemaArray:
+      type: array
+      items:
+        $ref: '#/components/schemas/ProjectSchema'
+
+    TanzakuSchema:
+      type: object
+      required:
+        - textLine1
+        - nameLine
+        - projectId
+      properties:
+        textLine1:
+          type: string
+          example: '短冊で'
+          maximum: 8
+        textLine2:
+          type: string
+          example: 'ザクザク'
+          maximum: 8
+        nameLine:
+          type: string
+          example: '山田太郎'
+          maximum: 16
+    TanzakuResponseSchema:
+      type: object
+      required:
+        - id
+        - textLine1
+        - nameLine
+        - projectId
+        - disabled
+      properties:
+        id:
+          type: string
+          example: 'clxrat7xl0001xd2txfzakzz9'
+        textLine1:
+          type: string
+          example: '短冊で'
+          maximum: 8
+        textLine2:
+          type: string
+          example: 'ザクザク'
+          maximum: 8
+        nameLine:
+          type: string
+          example: '山田太郎'
+          maximum: 16
+        projectId:
+          type: string
+          example: 'clxrat7xl0001xd2txfzakzz9'
+        disabled:
+          type: boolean
+          example: false
+    TanzakuSchemaArray:
+      type: array
+      items:
+        $ref: '#/components/schemas/TanzakuResponseSchema'
+    Error500:
+      type: string
+      example: 'Internal Server Error'
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: jwt

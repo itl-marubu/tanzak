@@ -1,11 +1,12 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
+import { getAllTanzaku } from '@/api'
 import { CreateTanzaku } from './createTanzaku'
 
 type tanzakuType = {
   textLine1: string
-  textLine2: string
+  textLine2?: string
   nameLine: string
 }
 
@@ -16,12 +17,21 @@ export const TanzakuToImage: React.FC = () => {
   const [tanzakuArray, setTanzakuArray] = useState([] as tanzakuType[])
 
   useEffect(() => {
-    const res = `${process.env.NEXT_PUBLIC_ENDPOINT}/tanzaku/${process.env.NEXT_PUBLIC_EVENTID}/list`
-    fetch(res)
-      .then((response) => response.json())
-      .then((data) => {
-        setTanzakuArray(data)
-      })
+    const fetchTanzaku = async () => {
+      try {
+        const tanzakuData = await getAllTanzaku()
+        if (tanzakuData) {
+          setTanzakuArray(tanzakuData)
+        } else {
+          console.error('error')
+        }
+      } catch (error) {
+        console.error('error', error)
+      }
+    }
+    fetchTanzaku().catch((error) => {
+      console.error('error', error)
+    })
   }, [])
 
   useEffect(() => {
