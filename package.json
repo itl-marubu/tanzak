@@ -18,7 +18,8 @@
     "stylelint": "stylelint 'src/**/*.{css,scss}'",
     "stylelint:fix": "stylelint --fix 'src/**/*.{css,scss}'",
     "typed-scss-modules": "typed-scss-modules src/styles --output src/styles",
-    "fix": "run-p lint:fix stylelint:fix format"
+    "fix": "run-p lint:fix stylelint:fix format",
+    "postinstall": "pnpm gen"
   },
   "dependencies": {
     "next": "14.2.4",
