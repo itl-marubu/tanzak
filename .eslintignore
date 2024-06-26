@@ -1,2 +1,2 @@
 src/components/icons/generated/*.tsx
-src/lib/*.ts
+src/api/client.d.ts

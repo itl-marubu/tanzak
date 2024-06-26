@@ -1,12 +1,38 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
+import { getAllTanzaku } from '@/api'
 import { CreateTanzaku } from './createTanzaku'
+
+type tanzakuType = {
+  textLine1: string
+  textLine2?: string
+  nameLine: string
+}
 
 export const TanzakuToImage: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const [image, setImage] = useState<HTMLImageElement | null>(null)
   const [imageLoaded, setImageLoaded] = useState(false)
+  const [tanzakuArray, setTanzakuArray] = useState([] as tanzakuType[])
+
+  useEffect(() => {
+    const fetchTanzaku = async () => {
+      try {
+        const tanzakuData = await getAllTanzaku()
+        if (tanzakuData) {
+          setTanzakuArray(tanzakuData)
+        } else {
+          console.error('error')
+        }
+      } catch (error) {
+        console.error('error', error)
+      }
+    }
+    fetchTanzaku().catch((error) => {
+      console.error('error', error)
+    })
+  }, [])
 
   useEffect(() => {
     const image = new Image()
@@ -64,19 +90,19 @@ export const TanzakuToImage: React.FC = () => {
           height: '100vh',
         }}
       />
-      {positionArray.map((position, index) => {
+      {tanzakuArray.map((tanzaku, index) => {
         return (
           <CreateTanzaku
             key={index}
-            textLine1="たんざくで"
-            textLine2="ざっくざく"
-            nameLine="みずさわ"
+            textLine1={tanzaku.textLine1}
+            textLine2={tanzaku.textLine2}
+            nameLine={tanzaku.nameLine}
             style={{
               position: 'absolute',
-              left: position.x,
-              top: position.y,
-              height: '200px',
+              height: '220px',
               width: 'auto',
+              left: positionArray[index].x,
+              top: positionArray[index].y,
             }}
           />
         )
