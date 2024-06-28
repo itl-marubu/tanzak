@@ -5,32 +5,19 @@ const client = createClient<paths>({
   baseUrl: process.env.NEXT_PUBLIC_ENDPOINT,
 })
 
-export const getAllTanzaku = async () => {
-  const res = await client.GET('/tanzaku/{projectId}/list', {
+export const getTenTanzaku = async (id: string) => {
+  const res = await client.GET('/tanzaku/{id}', {
     params: {
       path: {
-        projectId: process.env.NEXT_PUBLIC_EVENTID || '',
+        id: id,
       },
     },
   })
 
   if (res.error) {
-    throw new Error(res.error)
-  }
-
-  return res.data
-}
-
-export const getTenTanzaku = async () => {
-  const res = await client.GET('/tanzaku/{projectId}/show', {
-    params: {
-      path: {
-        projectId: process.env.NEXT_PUBLIC_EVENTID || '',
-      },
-    },
-  })
-
-  if (res.error) {
+    if (res.response.status === 500) {
+      return []
+    }
     throw new Error(res.error)
   }
 
