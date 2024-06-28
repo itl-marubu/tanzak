@@ -70,4 +70,4 @@ jobs:
         name: Setup
 
       - name: Build
-        run: pnpm build --no-lint
+        run: pnpm dlx @cloudflare/next-on-pages@1
