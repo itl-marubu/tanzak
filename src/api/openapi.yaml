@@ -143,7 +143,7 @@ paths:
                 $ref: '#/components/schemas/Error500'
   /projects/{projectId}/list:
     get:
-      operationId: getProjectAuthed
+      operationId: getProject
       tags:
         - Projects
       summary: Get Project
@@ -161,7 +161,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TanzakuResSchemaArray'
+                $ref: '#/components/schemas/TanzakuSchemaArray'
         '500':
           description: Internal Server Error
           content:
@@ -255,7 +255,35 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TanzakuResSchemaArray'
+                $ref: '#/components/schemas/TanzakuSchemaArray'
+        '500':
+          description: Internal Server Error
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Error500'
+
+  /tanzaku/{projectId}/show:
+    get:
+      operationId: getTanzakuPicked
+      tags:
+        - Tanzaku
+      summary: Get Tanzaku
+      description: 短冊を１０個古い順に取ってくるやつ
+      parameters:
+        - name: projectId
+          in: path
+          required: true
+          description: ID of the project to get
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Project found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TanzakuSchemaArray'
         '500':
           description: Internal Server Error
           content:
@@ -411,7 +439,7 @@ components:
         disabled:
           type: boolean
           example: false
-    TanzakuResSchemaArray:
+    TanzakuSchemaArray:
       type: array
       items:
         $ref: '#/components/schemas/TanzakuResponseSchema'

@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-import { getAllTanzaku } from '@/api'
+import { getTenTanzaku } from '@/api'
 import { CreateTanzaku } from './createTanzaku'
 
 type tanzakuType = {
@@ -19,7 +19,7 @@ export const TanzakuToImage: React.FC = () => {
   useEffect(() => {
     const fetchTanzaku = async () => {
       try {
-        const tanzakuData = await getAllTanzaku()
+        const tanzakuData = await getTenTanzaku()
         if (tanzakuData) {
           setTanzakuArray(tanzakuData)
         } else {
@@ -27,6 +27,7 @@ export const TanzakuToImage: React.FC = () => {
         }
       } catch (error) {
         console.error('error', error)
+        location.reload()
       }
     }
     fetchTanzaku().catch((error) => {
