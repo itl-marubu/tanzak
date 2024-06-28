@@ -5,11 +5,11 @@ const client = createClient<paths>({
   baseUrl: process.env.NEXT_PUBLIC_ENDPOINT,
 })
 
-export const getTenTanzaku = async () => {
+export const getTenTanzaku = async (id: string) => {
   const res = await client.GET('/tanzaku/{id}', {
     params: {
       path: {
-        id: process.env.NEXT_PUBLIC_EVENTID || '',
+        id: id,
       },
     },
   })

@@ -10,7 +10,11 @@ type tanzakuType = {
   nameLine: string
 }
 
-export const TanzakuToImage: React.FC = () => {
+type Props = {
+  id: string
+}
+
+export const TanzakuToImage: React.FC<Props> = ({ id }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const [image, setImage] = useState<HTMLImageElement | null>(null)
   const [imageLoaded, setImageLoaded] = useState(false)
@@ -19,7 +23,7 @@ export const TanzakuToImage: React.FC = () => {
   useEffect(() => {
     const fetchTanzaku = async () => {
       try {
-        const tanzakuData = await getTenTanzaku().catch((error) => {
+        const tanzakuData = await getTenTanzaku(id).catch((error) => {
           console.error('error', error)
           alert('問題が発生しました。\n エラーコード: geterr2')
         })
