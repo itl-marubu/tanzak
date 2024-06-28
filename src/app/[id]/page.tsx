@@ -3,6 +3,8 @@ import { QrCode } from '../_components/qrcode'
 import { TanzakuToImage } from '../_components/t2i'
 import styles from './page.module.scss'
 
+export const runtime = 'edge'
+
 export default function TanzakuShow({ params }: { params: { id: string } }) {
   return (
     <main className={styles.main}>
