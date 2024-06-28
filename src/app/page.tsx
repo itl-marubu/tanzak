@@ -1,4 +1,3 @@
-import { CreateTanzaku } from './_components/createTanzaku'
 import { Logo } from './_components/Logo'
 import { QrCode } from './_components/qrcode'
 import { TanzakuToImage } from './_components/t2i'
