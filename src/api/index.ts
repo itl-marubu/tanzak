@@ -20,3 +20,19 @@ export const getAllTanzaku = async () => {
 
   return res.data
 }
+
+export const getTenTanzaku = async () => {
+  const res = await client.GET('/tanzaku/{projectId}/show', {
+    params: {
+      path: {
+        projectId: process.env.NEXT_PUBLIC_EVENTID || '',
+      },
+    },
+  })
+
+  if (res.error) {
+    throw new Error(res.error)
+  }
+
+  return res.data
+}
