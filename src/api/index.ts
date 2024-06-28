@@ -22,15 +22,18 @@ export const getAllTanzaku = async () => {
 }
 
 export const getTenTanzaku = async () => {
-  const res = await client.GET('/tanzaku/{projectId}/show', {
+  const res = await client.GET('/tanzaku/{id}', {
     params: {
       path: {
-        projectId: process.env.NEXT_PUBLIC_EVENTID || '',
+        id: process.env.NEXT_PUBLIC_EVENTID || '',
       },
     },
   })
 
   if (res.error) {
+    if (res.response.status === 500) {
+      return []
+    }
     throw new Error(res.error)
   }
 
