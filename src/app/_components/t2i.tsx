@@ -49,8 +49,10 @@ export const TanzakuToImage: React.FC<Props> = ({ id }) => {
         console.error('error', error)
       })
     }, 60000)
-    return () => clearInterval(interval)
-  }, [])
+    return () => {
+      return clearInterval(interval)
+    }
+  }, [id])
 
   useEffect(() => {
     const image = new Image()
