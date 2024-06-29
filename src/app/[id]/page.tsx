@@ -1,6 +1,4 @@
 import styles from './page.module.scss'
-import { Logo } from '../_components/Logo'
-import { QrCode } from '../_components/qrcode'
 import { TanzakuToImage } from '../_components/t2i'
 import { MetaInfo } from './_components/info'
 
