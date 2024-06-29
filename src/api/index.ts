@@ -36,7 +36,7 @@ export const getProjectInfo = async (id: string) => {
       return res.data
     })
     .catch((error) => {
-      new Error(error)
+      new Error(`${error}`)
       console.error('error', error)
     })
   return res

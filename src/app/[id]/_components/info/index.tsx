@@ -1,8 +1,8 @@
 'use client'
+import { useEffect, useState } from 'react'
 import { getProjectInfo } from '@/api'
 import { Logo } from '@/app/_components/Logo'
 import { QrCode } from '@/app/_components/qrcode'
-import { useEffect, useState } from 'react'
 
 type Props = {
   id: string

@@ -1,6 +1,6 @@
+import { MetaInfo } from './_components/info'
 import styles from './page.module.scss'
 import { TanzakuToImage } from '../_components/t2i'
-import { MetaInfo } from './_components/info'
 
 export const runtime = 'edge'
 
