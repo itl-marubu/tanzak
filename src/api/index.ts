@@ -23,3 +23,21 @@ export const getTenTanzaku = async (id: string) => {
 
   return res.data
 }
+export const getProjectInfo = async (id: string) => {
+  const res = await client
+    .GET('/pub/{projectId}', {
+      params: {
+        path: {
+          projectId: id,
+        },
+      },
+    })
+    .then((res) => {
+      return res.data
+    })
+    .catch((error) => {
+      new Error(error)
+      console.error('error', error)
+    })
+  return res
+}
