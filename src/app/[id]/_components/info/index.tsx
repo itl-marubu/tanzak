@@ -47,7 +47,9 @@ export const MetaInfo: React.FC<Props> = ({ id }) => {
         }}
       >
         <Logo logoColor="#fff" />
-        <p>{projectData.noticeLarge || ''}</p>
+        <p style={{ fontSize: '2rem', fontWeight: 700 }}>
+          {projectData.noticeLarge || ''}
+        </p>
         <div style={{ position: 'fixed', bottom: '20px', right: '300px' }}>
           <h2>{projectData.noticeQR || '短冊の投稿はこちらから'}</h2>
           <QrCode
