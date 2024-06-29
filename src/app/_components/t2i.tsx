@@ -9,7 +9,6 @@ type tanzakuType = {
   textLine2?: string
   nameLine: string
 }
-
 type Props = {
   id: string
 }
