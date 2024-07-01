@@ -53,7 +53,7 @@ export const MetaInfo: React.FC<Props> = ({ id }) => {
         <div style={{ position: 'fixed', bottom: '20px', right: '300px' }}>
           <h2>{projectData.noticeQR || '短冊の投稿はこちらから'}</h2>
           <QrCode
-            url={`${process.env.NEXT_PUBLIC_POSTSITE_BASEURL}/${process.env.NEXT_PUBLIC_EVENTID}/post`}
+            url={`${process.env.NEXT_PUBLIC_POSTSITE_BASEURL}/${id}/post`}
           />
         </div>
       </div>
