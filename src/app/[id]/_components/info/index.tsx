@@ -41,7 +41,10 @@ export const MetaInfo: React.FC<Props> = ({ id }) => {
   useEffect(() => {
     const audio = new Audio(songUrl)
     audio.loop = true
-    audio.play()
+    audio.play().catch((error) => {
+      console.error('error', error)
+      alert('問題が発生しました。\n エラーコード: audioerr1')
+    })
     return () => {
       audio.pause()
     }
