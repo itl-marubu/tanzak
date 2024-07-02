@@ -27,7 +27,9 @@ export const CreateTanzaku = forwardRef<HTMLCanvasElement, TanzakuProps>(
       }
 
       const img = new Image()
-      img.src = '/tanzaku.webp'
+      // img.src = '/tanzaku.webp'
+      const random = Math.floor(Math.random() * 7)
+      img.src = `/tanzaku/${random}.webp`
       img.onload = () => {
         setImage(img)
         setImageLoaded(true)

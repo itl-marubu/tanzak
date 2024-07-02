@@ -17,6 +17,7 @@ type projectData = {
 }
 
 export const MetaInfo: React.FC<Props> = ({ id }) => {
+  const songUrl = '/song.webm'
   const [projectData, setProjectData] = useState({} as projectData)
   useEffect(() => {
     const fetchProjectInfo = async () => {
@@ -36,6 +37,15 @@ export const MetaInfo: React.FC<Props> = ({ id }) => {
       console.error('error', error)
     })
   }, [id])
+
+  useEffect(() => {
+    const audio = new Audio(songUrl)
+    audio.loop = true
+    audio.play()
+    return () => {
+      audio.pause()
+    }
+  }, [songUrl])
   return (
     <>
       <div
