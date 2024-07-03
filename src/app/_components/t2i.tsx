@@ -44,9 +44,7 @@ export const TanzakuToImage: React.FC<Props> = ({ id }) => {
       console.error('error', error)
     })
     const interval = setInterval(() => {
-      fetchTanzaku().catch((error) => {
-        console.error('error', error)
-      })
+      location.reload()
     }, 60000)
     return () => {
       return clearInterval(interval)
