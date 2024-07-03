@@ -53,9 +53,9 @@ export const MetaInfo: React.FC<Props> = ({ id }) => {
       <div
         style={{
           position: 'fixed',
-          width: '30%',
+          width: '35%',
           top: '10vh',
-          right: '50px',
+          right: '10px',
         }}
       >
         <Logo logoColor="#fff" />
